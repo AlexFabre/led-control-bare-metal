@@ -95,6 +95,8 @@ int main(void)
 
     infoPrintln("Device started !");
 
+    reset_button_variables();
+
     /* USER CODE END 2 */
 
     /* Infinite loop */
