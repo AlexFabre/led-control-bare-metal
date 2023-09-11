@@ -91,4 +91,18 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle)
 
 /* USER CODE BEGIN 1 */
 
+void start_TIM_periodic_wkup(uint16_t milliseconds)
+{
+    uint16_t tim_tick = (uint16_t)CONVERT_MS_TO_TIM_TICK(milliseconds);
+
+    /* Configure timer register */
+    __HAL_TIM_SetAutoreload(&htim17, tim_tick - 1);
+    __HAL_TIM_SetCounter(&htim17, 0);
+
+    /* Start timer if currently stopped */
+    if (HAL_TIM_Base_GetState(&htim17) == HAL_TIM_STATE_READY) {
+        HAL_TIM_Base_Start_IT(&htim17);
+    }
+}
+
 /* USER CODE END 1 */
