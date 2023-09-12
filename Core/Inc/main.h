@@ -100,6 +100,9 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+/* Called when RTC Timer triggers */
+void RTC_wakeup_IRQ(void);
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

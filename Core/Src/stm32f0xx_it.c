@@ -152,6 +152,7 @@ void RTC_IRQHandler(void)
     /* USER CODE END RTC_IRQn 0 */
     HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
     /* USER CODE BEGIN RTC_IRQn 1 */
+    RTC_wakeup_IRQ();
 
     /* USER CODE END RTC_IRQn 1 */
 }
@@ -185,6 +186,7 @@ void TIM17_IRQHandler(void)
     /* USER CODE END TIM17_IRQn 0 */
     HAL_TIM_IRQHandler(&htim17);
     /* USER CODE BEGIN TIM17_IRQn 1 */
+    toggle_LED();
 
     /* USER CODE END TIM17_IRQn 1 */
 }
