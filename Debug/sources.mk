@@ -25,5 +25,6 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+Drivers/SEGGER/RTT \
 Drivers/STM32F0xx_HAL_Driver/Src \
 
