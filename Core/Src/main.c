@@ -285,7 +285,7 @@ void enter_sequence_running(void)
     /* TODO: Currently the led toggles every 300ms. (300ms ON - 300ms OFF)
      * We would rather prefer the led to make a short blink every 3s (150ms ON - 2.850s OFF)
      *
-     * Send on UART2 the message "Enter running !" */
+     * Send the message "Enter running !" on UART2 rather than on RTT output */
 
     infoPrintln("Enter running !");
 
@@ -299,7 +299,7 @@ void enter_sequence_stanby(void)
     /* TODO: Currently the led toggles every 600ms. (600ms ON - 600ms OFF)
      * We would rather prefer the led to make a short blink every 10s (150ms ON - 9.850s OFF)
      *
-     * Send on UART2 the message "Enter standby !" */
+     * Send the message "Enter standby !" on UART2 rather than on RTT output */
 
     infoPrintln("Enter standby !");
 
@@ -313,7 +313,7 @@ void stop_sequence(void)
     /* TODO: We would like a 4 blink scheme as soon as the cycle stops, to inform the user
      * that the app effectively stopped running: (150ms ON - 150ms OFF) x4
      *
-     * Send on UART2 the message "Enter shutdown !" */
+     * Send the message "Enter shutdown !" on UART2 rather than on RTT output*/
 
     infoPrintln("Enter shutdown !");
 
