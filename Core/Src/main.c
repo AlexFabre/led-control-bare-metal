@@ -156,17 +156,21 @@ int main(void)
 
     reset_button_variables();
 
+    button_event_t btn_state;
+
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1) {
+        /* Read the btn event */
+        btn_state = get_button_state();
 
-        if (get_button_state() == BTN_CLICK) {
+        if (btn_state == BTN_CLICK) {
             user_click_event();
         }
 
-        if (get_button_state() == BTN_DOUBLE_CLICK) {
+        if (btn_state == BTN_DOUBLE_CLICK) {
             /* Send the big frame over UART */
             uart2_print(big_msg, sizeof(big_msg));
         }
