@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "button.h"
 #include "gpio.h"
+#include "tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -186,6 +187,33 @@ void TIM17_IRQHandler(void)
     /* USER CODE END TIM17_IRQn 0 */
     HAL_TIM_IRQHandler(&htim17);
     /* USER CODE BEGIN TIM17_IRQn 1 */
+
+    app_state_t current_app_state = get_current_app_state();
+
+    bool current_LED_state = get_LED_state();
+
+    switch (current_app_state) {
+    case APP_RUNNING:
+        if (current_LED_state == 1) {
+            start_TIM_periodic_wkup(2850);
+        } else {
+            start_TIM_periodic_wkup(150);
+        }
+        break;
+    case APP_STANDBY:
+        if (current_LED_state == 1) {
+            start_TIM_periodic_wkup(9850);
+        } else {
+            start_TIM_periodic_wkup(150);
+        }
+        break;
+        break;
+    case APP_SHUTDOWN:
+    default:
+        /* Should never happen */
+        break;
+    }
+
     toggle_LED();
 
     /* USER CODE END TIM17_IRQn 1 */

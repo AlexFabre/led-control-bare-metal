@@ -38,6 +38,9 @@ extern "C" {
 /* Toggle Green LED */
 #define toggle_LED() (HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin))
 
+/* Get LED GPIO level (1 ON / 0 OFF) */
+#define get_LED_state() (HAL_GPIO_ReadPin(LED_GPIO_Port, LED_Pin))
+
 /* Set LED on (1) or off (0) */
 #define set_LED(state) HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, (state == true) ? GPIO_PIN_SET : GPIO_PIN_RESET);
 

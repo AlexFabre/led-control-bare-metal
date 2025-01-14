@@ -230,15 +230,14 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-/* Possible states of the device */
-typedef enum {
-    APP_SHUTDOWN,
-    APP_RUNNING,
-    APP_STANDBY
-} app_state_t;
-
 /* Current state of the device */
 static app_state_t _app_state = APP_SHUTDOWN;
+
+/* Get the current app state */
+app_state_t get_current_app_state(void)
+{
+    return _app_state;
+}
 
 /* Process device state change consecutive to button press */
 void user_click_event(void)
@@ -293,7 +292,7 @@ void enter_sequence_running(void)
 
     infoPrintln("Enter running !");
 
-    start_TIM_periodic_wkup(300);
+    start_TIM_periodic_wkup(5); /* First blink will happend in 5ms */
     start_RTC_periodic_wkup(20);
 }
 
@@ -307,7 +306,7 @@ void enter_sequence_stanby(void)
 
     infoPrintln("Enter standby !");
 
-    start_TIM_periodic_wkup(600);
+    start_TIM_periodic_wkup(5); /* First blink will happend in 5ms */
     start_RTC_periodic_wkup(40);
 }
 

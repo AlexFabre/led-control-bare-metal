@@ -100,6 +100,16 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+/* Possible states of the device */
+typedef enum {
+    APP_SHUTDOWN,
+    APP_RUNNING,
+    APP_STANDBY
+} app_state_t;
+
+/* Get the current app state */
+app_state_t get_current_app_state(void);
+
 /* Called when RTC Timer triggers */
 void RTC_wakeup_IRQ(void);
 
