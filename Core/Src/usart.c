@@ -22,6 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 
+#include <string.h>
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;
@@ -114,10 +116,30 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
 
 /* USER CODE BEGIN 1 */
 
+#define UART2_TX_BUFFER_SIZE (512)
+
+static char   buffer[UART2_TX_BUFFER_SIZE];
+static size_t buffer_idx = 0;
+
 void uart2_print(const char *msg, const size_t len)
 {
     if (len > UINT16_MAX) {
         errorPrintln("msg too big to be sent");
+        return;
+    }
+
+    if (huart2.gState == HAL_UART_STATE_BUSY_TX) {
+        /* A Tx is already ongoing */
+        size_t len_buffered;
+        if (len > (UART2_TX_BUFFER_SIZE - buffer_idx)) {
+            len_buffered = (UART2_TX_BUFFER_SIZE - buffer_idx);
+        } else {
+            len_buffered = len;
+        }
+        memcpy(buffer + buffer_idx, msg, len_buffered);
+        buffer_idx += len_buffered;
+
+        infoPrintln("UART2 Tx buffered");
         return;
     }
 
@@ -140,6 +162,11 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
         infoPrintln("UART2 Tx complete");
     } else {
         errorPrintln("Unknown Tx complete IRQ");
+    }
+
+    if (buffer_idx != 0) {
+        uart2_print(buffer, buffer_idx);
+        buffer_idx = 0;
     }
 }
 

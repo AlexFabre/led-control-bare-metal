@@ -290,7 +290,7 @@ void enter_sequence_running(void)
      *
      * Send the message "Enter running !" on UART2 rather than on RTT output */
 
-    infoPrintln("Enter running !");
+    uart2_print("Enter running !", 16);
 
     start_TIM_periodic_wkup(5); /* First blink will happend in 5ms */
     start_RTC_periodic_wkup(20);
@@ -304,7 +304,7 @@ void enter_sequence_stanby(void)
      *
      * Send the message "Enter standby !" on UART2 rather than on RTT output */
 
-    infoPrintln("Enter standby !");
+    uart2_print("Enter standby !", 16);
 
     start_TIM_periodic_wkup(5); /* First blink will happend in 5ms */
     start_RTC_periodic_wkup(40);
@@ -318,7 +318,7 @@ void stop_sequence(void)
      *
      * Send the message "Enter shutdown !" on UART2 rather than on RTT output*/
 
-    infoPrintln("Enter shutdown !");
+    uart2_print("Enter shutdown !", 17);
 
     stop_RTC_periodic_wkup();
     stop_TIM_periodic_wkup();
